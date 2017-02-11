@@ -38,12 +38,6 @@
     "gulp-coveralls": "^0.1.0",
     "semantic-release": "^6.3.2"
   },
-  "eslintConfig": {
-    "extends": "xo-space",
-    "env": {
-      "mocha": true
-    }
-  },
   "repository": "yhuard/generator-fractal-component",
   "scripts": {
     "prepublish": "gulp prepublish",
