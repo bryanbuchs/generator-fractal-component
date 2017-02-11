@@ -1,6 +1,6 @@
 {
   "name": "generator-fractal-component",
-  "version": "0.0.0-development",
+  "version": "1.0.0",
   "description": "Scaffold out a Fractal component",
   "homepage": "",
   "author": {
