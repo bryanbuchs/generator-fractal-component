@@ -1,0 +1,15 @@
+{
+  "name": "<%= componentName %>",
+  "version": "1.0.0",
+  "description": "<%= componentName %> component",
+  "main": "<%= componentName %>.config.js",
+  "style": "<%= componentStylesheet %>",
+  "test": "echo \"Error: no test specified\" && exit 1",
+  "repo": "",
+  "keywords": [
+    "fractal",
+    "component"
+  ],
+  "author": "",
+  "license": "MIT"
+}

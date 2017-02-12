@@ -12,17 +12,23 @@ module.exports = Generator.extend({
     var formats = ['css', 'scss', 'less'];
 
     var prompts = [{
-      type: 'String',
+      type: 'input',
       name: 'componentName',
       required: true,
       message: 'What\'s the name of your component?',
-      description: 'Component name'
+      description: 'Component name',
+      default: this.appname // Default to current folder name
     }, {
       type: 'list',
       name: 'format',
       required: true,
       message: 'In what format would you like the stylesheet?',
       choices: formats
+    }, {
+      type: 'confirm',
+      name: 'npm',
+      message: 'Is it a npm package?',
+      default: true
     }];
 
     return this.prompt(prompts).then(function (props) {
@@ -35,7 +41,7 @@ module.exports = Generator.extend({
 
     this.fs.copyTpl(
       this.templatePath(path.join('styles', '_component.' + this.props.format)),
-      this.destinationPath(path.join(this.props.componentName, outputFile)),
+      this.destinationPath(outputFile),
       {
         componentName: this.props.componentName
       }
@@ -45,7 +51,7 @@ module.exports = Generator.extend({
   componentNotes: function () {
     this.fs.copyTpl(
       this.templatePath('_README.md'),
-      this.destinationPath(path.join(this.props.componentName, 'README.md')),
+      this.destinationPath('README.md'),
       {
         componentName: this.props.componentName
       }
@@ -57,7 +63,7 @@ module.exports = Generator.extend({
 
     this.fs.copyTpl(
       this.templatePath('_component.html'),
-      this.destinationPath(path.join(this.props.componentName, outputFile)),
+      this.destinationPath(outputFile),
       {
         componentName: this.props.componentName
       }
@@ -69,10 +75,23 @@ module.exports = Generator.extend({
 
     this.fs.copyTpl(
       this.templatePath('_component.config.js'),
-      this.destinationPath(path.join(this.props.componentName, outputFile)),
+      this.destinationPath(outputFile),
       {
         componentName: this.props.componentName
       }
     );
+  },
+
+  componentPackageJSON: function () {
+    if (this.props.npm) {
+      this.fs.copyTpl(
+        this.templatePath('_package.json'),
+        this.destinationPath('package.json'),
+        {
+          componentName: this.props.componentName,
+          componentStylesheet: this.props.componentName + '.' + this.props.format
+        }
+      );
+    }
   }
 });
