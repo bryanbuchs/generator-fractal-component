@@ -15,20 +15,18 @@ module.exports = Generator.extend({
       required: true,
       message: 'What\'s the name of your component?',
       description: 'Component name',
-      default: this.appname // Default to current folder name
     }];
 
-    return this.prompt(prompts).then(function (props) {
-      this.props = props;
-    }.bind(this));
+    return this.prompt(prompts).then((props) => {
+        props.componentDirectory = `./${props.componentName}`;
+        return this.props = props;
+    });
   },
 
   componentStylesheet: function () {
-    var outputFile = this.props.componentName + '.less';
-
     this.fs.copyTpl(
       this.templatePath('_component.less'),
-      this.destinationPath(outputFile),
+      this.destinationPath(`${this.props.componentDirectory}/${this.props.componentName}.less`),
       {
         componentName: this.props.componentName
       }
@@ -38,7 +36,7 @@ module.exports = Generator.extend({
   componentNotes: function () {
     this.fs.copyTpl(
       this.templatePath('_README.md'),
-      this.destinationPath('README.md'),
+      this.destinationPath(`${this.props.componentDirectory}/README.md`),
       {
         componentName: this.props.componentName
       }
@@ -46,11 +44,9 @@ module.exports = Generator.extend({
   },
 
   componentTemplate: function () {
-    var outputFile = this.props.componentName + '.twig';
-
     this.fs.copyTpl(
       this.templatePath('_component.twig'),
-      this.destinationPath(outputFile),
+      this.destinationPath(`${this.props.componentDirectory}/${this.props.componentName}.twig`),
       {
         componentName: this.props.componentName
       }
@@ -58,11 +54,9 @@ module.exports = Generator.extend({
   },
 
   componentConfig: function () {
-    var outputFile = this.props.componentName + '.config.yml';
-
     this.fs.copyTpl(
       this.templatePath('_component.config.yml'),
-      this.destinationPath(outputFile),
+      this.destinationPath(`${this.props.componentDirectory}/${this.props.componentName}.config.yml`),
       {
         componentName: this.props.componentName
       }
