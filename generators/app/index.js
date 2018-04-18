@@ -27,7 +27,7 @@ module.exports = Generator.extend({
     var outputFile = this.props.componentName + '.less';
 
     this.fs.copyTpl(
-      this.templatePath(path.join('styles', '_component.less')),
+      this.templatePath('_component.less'),
       this.destinationPath(outputFile),
       {
         componentName: this.props.componentName
@@ -58,10 +58,10 @@ module.exports = Generator.extend({
   },
 
   componentConfig: function () {
-    var outputFile = this.props.componentName + '.config.js';
+    var outputFile = this.props.componentName + '.config.yml';
 
     this.fs.copyTpl(
-      this.templatePath('_component.config.js'),
+      this.templatePath('_component.config.yml'),
       this.destinationPath(outputFile),
       {
         componentName: this.props.componentName
