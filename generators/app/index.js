@@ -9,8 +9,6 @@ module.exports = Generator.extend({
       'Welcome to the magnificent ' + chalk.red('fractal-component') + ' generator!'
     ));
 
-    var formats = ['css', 'scss', 'less'];
-
     var prompts = [{
       type: 'input',
       name: 'componentName',
@@ -18,17 +16,6 @@ module.exports = Generator.extend({
       message: 'What\'s the name of your component?',
       description: 'Component name',
       default: this.appname // Default to current folder name
-    }, {
-      type: 'list',
-      name: 'format',
-      required: true,
-      message: 'In what format would you like the stylesheet?',
-      choices: formats
-    }, {
-      type: 'confirm',
-      name: 'npm',
-      message: 'Is it a npm package?',
-      default: true
     }];
 
     return this.prompt(prompts).then(function (props) {
@@ -37,10 +24,10 @@ module.exports = Generator.extend({
   },
 
   componentStylesheet: function () {
-    var outputFile = this.props.componentName + '.' + this.props.format;
+    var outputFile = this.props.componentName + '.less';
 
     this.fs.copyTpl(
-      this.templatePath(path.join('styles', '_component.' + this.props.format)),
+      this.templatePath(path.join('styles', '_component.less')),
       this.destinationPath(outputFile),
       {
         componentName: this.props.componentName
@@ -59,10 +46,10 @@ module.exports = Generator.extend({
   },
 
   componentTemplate: function () {
-    var outputFile = this.props.componentName + '.html';
+    var outputFile = this.props.componentName + '.twig';
 
     this.fs.copyTpl(
-      this.templatePath('_component.html'),
+      this.templatePath('_component.twig'),
       this.destinationPath(outputFile),
       {
         componentName: this.props.componentName
@@ -80,18 +67,6 @@ module.exports = Generator.extend({
         componentName: this.props.componentName
       }
     );
-  },
-
-  componentPackageJSON: function () {
-    if (this.props.npm) {
-      this.fs.copyTpl(
-        this.templatePath('_package.json'),
-        this.destinationPath('package.json'),
-        {
-          componentName: this.props.componentName,
-          componentStylesheet: this.props.componentName + '.' + this.props.format
-        }
-      );
-    }
   }
+
 });
