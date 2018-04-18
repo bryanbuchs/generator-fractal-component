@@ -15,6 +15,12 @@ module.exports = Generator.extend({
       required: true,
       message: 'What\'s the name of your component (component-name)?',
       description: 'Component name',
+    }, {
+        type: 'list',
+        name: 'componentStatus',
+        required: true,
+        message: 'Status flag',
+        choices: ['fpo', 'wip', 'review', 'approved']
     }];
 
     return this.prompt(prompts).then((props) => {
@@ -58,7 +64,8 @@ module.exports = Generator.extend({
       this.templatePath('_component.config.yml'),
       this.destinationPath(`${this.props.componentDirectory}/${this.props.componentName}.config.yml`),
       {
-        componentName: this.props.componentName
+        componentName: this.props.componentName,
+        componentStatus: this.props.componentStatus
       }
     );
   }
