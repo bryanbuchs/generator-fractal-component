@@ -2,13 +2,10 @@ var Generator = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
 var path = require('path');
+var titleCase = require('title-case');
 
 module.exports = Generator.extend({
   prompting: function () {
-    this.log(yosay(
-      'Welcome to the magnificent ' + chalk.blue('fractal-component') + ' generator!'
-    ));
-
     var prompts = [{
       type: 'input',
       name: 'componentName',
@@ -34,7 +31,8 @@ module.exports = Generator.extend({
       this.templatePath('_component.less'),
       this.destinationPath(`${this.props.componentDirectory}/${this.props.componentName}.less`),
       {
-        componentName: this.props.componentName
+        componentName: this.props.componentName,
+        componentLabel: titleCase(this.props.componentName),
       }
     );
   },
@@ -44,7 +42,8 @@ module.exports = Generator.extend({
       this.templatePath('_README.md'),
       this.destinationPath(`${this.props.componentDirectory}/README.md`),
       {
-        componentName: this.props.componentName
+        componentName: this.props.componentName,
+        componentLabel: titleCase(this.props.componentName),
       }
     );
   },
@@ -54,7 +53,8 @@ module.exports = Generator.extend({
       this.templatePath('_component.twig'),
       this.destinationPath(`${this.props.componentDirectory}/${this.props.componentName}.twig`),
       {
-        componentName: this.props.componentName
+        componentName: this.props.componentName,
+        componentLabel: titleCase(this.props.componentName),
       }
     );
   },
@@ -65,6 +65,7 @@ module.exports = Generator.extend({
       this.destinationPath(`${this.props.componentDirectory}/${this.props.componentName}.config.yml`),
       {
         componentName: this.props.componentName,
+        componentLabel: titleCase(this.props.componentName),
         componentStatus: this.props.componentStatus
       }
     );

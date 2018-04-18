@@ -1,1 +1,1 @@
-<%= componentName.replace('-', ' ') %>
+<%= componentLabel %>
