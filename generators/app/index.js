@@ -6,14 +6,14 @@ var path = require('path');
 module.exports = Generator.extend({
   prompting: function () {
     this.log(yosay(
-      'Welcome to the magnificent ' + chalk.red('fractal-component') + ' generator!'
+      'Welcome to the magnificent ' + chalk.blue('fractal-component') + ' generator!'
     ));
 
     var prompts = [{
       type: 'input',
       name: 'componentName',
       required: true,
-      message: 'What\'s the name of your component?',
+      message: 'What\'s the name of your component (component-name)?',
       description: 'Component name',
     }];
 

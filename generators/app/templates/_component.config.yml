@@ -1,2 +1,3 @@
-title: '<%= componentName %>'
-label: '<%= componentName %>'
+title: <%= componentName %>
+label: <%= componentName.replace('-', ' ') %>
+status: fpo
