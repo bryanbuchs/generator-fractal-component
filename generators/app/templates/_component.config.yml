@@ -1,3 +1,2 @@
-title: <%= componentName %>
 label: <%= componentLabel %>
 status: <%= componentStatus %>
