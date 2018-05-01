@@ -37,7 +37,7 @@
     "gulp-coveralls": "^0.1.4",
     "semantic-release": "^6.3.2"
   },
-  "repository": "yhuard/generator-fractal-component",
+  "repository": "bryanbuchs/generator-fractal-component",
   "scripts": {
     "prepublish": "gulp prepublish",
     "test": "gulp",
