@@ -8,7 +8,7 @@ First, install [Yeoman](http://yeoman.io) and generator-fractal-component using 
 
 ```bash
 npm install -g yo
-npm install -g generator-fractal-component
+npm install -g git+https://github.com/bryanbuchs/generator-fractal-component.git
 ```
 
 Then generate your new project:
