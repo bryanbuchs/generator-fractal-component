@@ -12,6 +12,16 @@ module.exports = Generator.extend({
       message: 'What\'s the name of your component (component-name)?',
       description: 'Component name',
     }, {
+      type: "confirm",
+      name: "componentScript",
+      message: "Add javascript boilerplate?",
+      default: false
+    }, {
+      type: "confirm",
+      name: "componentNotes",
+      message: "Add a README?",
+      default: false
+    }, {
         type: 'list',
         name: 'componentStatus',
         required: true,
@@ -37,14 +47,29 @@ module.exports = Generator.extend({
   },
 
   componentNotes: function () {
-    this.fs.copyTpl(
-      this.templatePath('_README.md'),
-      this.destinationPath(`${this.props.componentDirectory}/README.md`),
-      {
-        componentName: this.props.componentName,
-        componentLabel: titleCase(this.props.componentName),
-      }
-    );
+    if (this.props.componentNotes) {
+      this.fs.copyTpl(
+        this.templatePath('_README.md'),
+        this.destinationPath(`${this.props.componentDirectory}/README.md`),
+        {
+          componentName: this.props.componentName,
+          componentLabel: titleCase(this.props.componentName),
+        }
+      );
+    }
+  },
+
+  componentScript: function () {
+    if (this.props.componentScript) {
+      this.fs.copyTpl(
+        this.templatePath('_component.js'),
+        this.destinationPath(`${this.props.componentDirectory}/${this.props.componentName}.js`),
+        {
+          componentName: this.props.componentName,
+          componentLabel: titleCase(this.props.componentName),
+        }
+      );
+    }
   },
 
   componentTemplate: function () {

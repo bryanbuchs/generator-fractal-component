@@ -1,0 +1,9 @@
+/**
+ * <%= componentName %>
+ */
+
+(function($) {
+
+
+
+})(jQuery);
